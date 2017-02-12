@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    			<ul class="filters">
+					<li>
+						<a :class="selector==='' ? 'selected' : ''" href="#/" @click='filterShow("#/")'>All</a>
+					</li>
+					<li>
+						<a :class="selector===false ? 'selected' : ''" href="#/active" @click='filterShow("#/active")'>Active</a>
+					</li>
+					<li>
+						<a :class="selector===true ? 'selected' : ''" href="#/completed" @click='filterShow("#/completed")'>Completed</a>
+					</li>
+				</ul>
+
+
+				<ul class="filters">
+                    <li>
+                        <router-link :class="selector==='' ? 'selected' : ''" to="/" @click='filterShow("#/")'>All</router-link>
+                    </li>
+                    <li>
+                        <router-link :class="selector===false ? 'selected' : ''" to="/active" @click='filterShow("#/active")'>Active</router-link>
+                    </li>
+                    <li>
+                        <router-link :class="selector===true ? 'selected' : ''" to="/completed" @click='filterShow("#/completed")'>Completed</router-link>
+                    </li>
+                </ul>
+
+
+
+                <script type="text/x-template" id="show-card">
+            <section class="main" v-show='todos.length'>
+                <input class="toggle-all" type="checkbox" v-on:click='toggleAll' v-bind:checked='selectedAll'/>
+                <label for="toggle-all">Mark all as complete</label>
+                <ul class="todo-list">
+                    <!-- These are here just to show the structure of the list items -->
+                    <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+                    
+                    <li v-for='(todo,index) in filterTodos' :class="{completed:todo.completed,editing : index===curEditing}" >
+                        <div class="view">
+                            <input class="toggle" type="checkbox" v-model='todo.completed' @click='saveLocal'/>
+                            <label @dblclick='editing(index)'>{{todo.text}}</label>
+                            <button class="destroy" @click='removeTodo(index)'></button>
+                        </div>
+                        <input class="edit" v-model="todo.text" @blur='save' @keyup.enter='save'/>
+                    </li>
+                </ul>
+            </section>
+        </script>
+    </body>
+</html>

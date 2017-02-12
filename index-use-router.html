@@ -45,16 +45,16 @@
 				<span class="todo-count"><strong>{{itemsLeft}}</strong> item left</span>
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
-					<li>
-						<a :class="selector==='' ? 'selected' : ''" href="#/" @click='filterShow("#/")'>All</a>
-					</li>
-					<li>
-						<a :class="selector===false ? 'selected' : ''" href="#/active" @click='filterShow("#/active")'>Active</a>
-					</li>
-					<li>
-						<a :class="selector===true ? 'selected' : ''" href="#/completed" @click='filterShow("#/completed")'>Completed</a>
-					</li>
-				</ul>
+                    <li>
+                        <router-link :class="selector==='' ? 'selected' : ''" to="/" >All</router-link>
+                    </li>
+                    <li>
+                        <router-link :class="selector===false ? 'selected' : ''" to="/active" >Active</router-link>
+                    </li>
+                    <li>
+                        <router-link :class="selector===true ? 'selected' : ''" to="/completed" >Completed</router-link>
+                    </li>
+                </ul>
 				<!-- Hidden if no completed items are left ↓ -->
 				<button class="clear-completed" v-show='itemsLeft !== todos.length' @click='clearComputedItems'>Clear completed</button>
 			</footer>
@@ -71,7 +71,7 @@
 
 		<!-- Scripts here. Don't remove ↓ -->
 		<script src="node_modules/vue/dist/vue.js"></script>
-		<script src="node_modules/vue-router//dist/vue-router.js"></script>
-		<script src="js/app.js"></script>
+		<script src="node_modules/vue-router/dist/vue-router.js"></script>
+		<script src="js/app-use-router.js"></script>
 	</body>
 </html>

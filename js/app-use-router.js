@@ -1,8 +1,15 @@
 (function (window) {
 	'use strict';
-
 	// Your starting point. Enjoy the ride!
 
+	var showCpt = {
+	};
+
+	var router = new VueRouter({
+		routes : [
+			{path:'/:status',component:showCpt}
+		] 
+	});
 
 	var app = new Vue({
 		el : '#app',
@@ -123,7 +130,27 @@
 		},
 		created : function(){
 			this.todos = this.getLocal();
+		},
+		router,
+		watch : {
+			$route(to,from){
+				
+				switch(to.params.status){
+					case undefined:
+						this.selector = '';
+						break;
+					case 'active':
+						this.selector = false;
+						break;
+					case 'completed':
+					this.selector = true;
+						break;
+					default:
+						this.selector = '';
+						break;
+				}
+			}
 		}
-	})
-	window.app = app;
-})(window);
+
+	});
+	window.app = app})(window);
